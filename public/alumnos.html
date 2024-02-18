@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumnos</title>
+</head>
+<body>
+    <h1>Alumnos</h1>
+    <div id="results"></div>
+    <a href="index.html">Volver a la página de inicio</a>
+    <script src="/js/alumnos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <button id="eliminarAlumnoBtn">Eliminar Alumno</button>
+
+<!-- Agrega el siguiente script en tu archivo alumnos.html -->
+<script>
+    // Función para eliminar todos los alumnos
+    function eliminarAlumnos() {
+        if (confirm('¿Estás seguro de que deseas eliminar todos los alumnos?')) {
+            $.ajax({
+                url: '/eliminar_alumnos',
+                method: 'DELETE',
+                dataType: 'json',
+                success: function (data) {
+                    alert('Todos los alumnos han sido eliminados correctamente.');
+                    // Puedes recargar la página o realizar alguna acción adicional si es necesario
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error('Error al eliminar alumnos:', error);
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

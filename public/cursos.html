@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos</title>
+    <style>
+        form {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Cursos</h1>
+    <div id="results"></div>
+    <a href="index.html">Volver a la página de inicio</a>
+    <script src="/js/cursos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Agrega el siguiente script en tu archivo cursos.html -->
+<script>
+    // Función para actualizar los cursos
+    function actualizarCursos() {
+        if (confirm('¿Estás seguro de que deseas actualizar los cursos?')) {
+            $.ajax({
+                url: '/actualizar_cursos',
+                method: 'PUT',
+                dataType: 'json',
+                success: function (data) {
+                    alert('Los cursos han sido actualizados correctamente.');
+                    // Puedes recargar la página o realizar alguna acción adicional si es necesario
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error('Error al actualizar cursos:', error);
+                }
+            });
+        }
+    }
+</script>
+<form>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" required>
+
+    <label for="lugar">Lugar:</label>
+    <input type="text" id="lugar" name="lugar" required>
+
+    <label for="nivel">Nivel:</label>
+    <input type="text" id="nivel" name="nivel" required>
+
+    <button type="button" onclick="actualizarCursos()">Actualizar Cursos</button>
+</form>
+
+</body>
+</html>
